@@ -63,11 +63,18 @@ mongoose.connect("mongodb://localhost:27017/fruitsDB",  {useNewUrlParser: true, 
 //       callback(result);
 //   });
 // }
-
+//-------CREATE----------//
 //Insert one
 const fruitSchema = new mongoose.Schema({
-  name: String,
-  rating: Number,
+  name: {
+    type: String,
+    required: [true, "Fruits have to have a name!"]
+  },
+  rating: {
+    type: Number,
+    min: [1, "Minimum rating is 1"],
+    max: [10, "Maximum rating is 10"]
+  },
   review: String
 });
 
@@ -75,42 +82,42 @@ const Fruit = mongoose.model("Fruit", fruitSchema);
 
 
 const fruit = new Fruit({
-  name: "Apple",
-  rating: 8,
-  review: "Great fruit."
+  name: "Peach",
+  rating: 10,
+  review: "Peaches are lovely."
 });
 
 //fruit.save();
 
 //Insert many
-const kiwi = new Fruit({
-  name: "Kiwi",
-  score: 10,
-  review: "The best fruit"
-});
+// const kiwi = new Fruit({
+//   name: "Kiwi",
+//   score: 10,
+//   review: "The best fruit"
+// });
+//
+// const orange = new Fruit({
+//   name: "Orange",
+//   score: 6,
+//   review: "A bit bitter"
+// });
+//
+// const banana = new Fruit({
+//   name: "Banana",
+//   score: 5,
+//   review: "Not a fan of the texture"
+// });
 
-const orange = new Fruit({
-  name: "Orange",
-  score: 6,
-  review: "A bit bitter"
-});
-
-const banana = new Fruit({
-  name: "Banana",
-  score: 5,
-  review: "Not a fan of the texture"
-});
-
-Fruit.insertMany([kiwi, orange, banana], function(err){
-  if(err){
-    console.log(err);
-  }else{
-    console.log("Successfully saved fruits to fruit db");
-  }
-});
+// Fruit.insertMany([kiwi, orange, banana], function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Successfully saved fruits to fruitsDB");
+//   }
+// });
 
 
-
+//Create person challenge
 const personSchema = new mongoose.Schema({
   name: String,
   age: Number
@@ -126,8 +133,21 @@ const person = new Person({
 //person.save();
 
 
+//--------READ--------//
+//Find all
+Fruit.find(function(err, fruits){
+  if(err){
+    console.log(err);
+  }else{
+    //console.log(fruits);
 
+    mongoose.connection.close();
 
+    fruits.forEach((fruit) => {
+      console.log(fruit.name);
+    });
+  }
+});
 
 
 //
