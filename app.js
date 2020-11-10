@@ -120,7 +120,9 @@ const fruit = new Fruit({
 //Create person challenge
 const personSchema = new mongoose.Schema({
   name: String,
-  age: Number
+  age: Number,
+  //Relationship
+  favoriteFruit: fruitSchema
 });
 
 const Person = mongoose.model("Person", personSchema);
@@ -131,6 +133,25 @@ const person = new Person({
 });
 
 //person.save();
+
+const pineapple = new Fruit({
+  name: "Pineapple",
+  rating: 9,
+  review: "Great fruit."
+});
+
+//pineapple.save();
+
+const amy = new Person({
+  name: "Amy",
+  age: 19,
+  favoriteFruit: pineapple
+});
+
+//amy.save();
+
+
+
 
 
 
@@ -172,6 +193,22 @@ Fruit.find(function(err, fruits){
 //     console.log("Successfully updated the document");
 //   }
 // });
+
+const lemon = new Fruit({
+  name: "Lemon",
+  rating: 7,
+  review: "Sour!"
+});
+
+//lemon.save();
+
+// Person.updateOne({name: "John"}, {favoriteFruit: lemon}, function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Person updated");
+//   }
+// })
 
 //-----DELETE ONE-----//
 // Fruit.deleteOne({_id: "5fa9de2f69268653e05a5533"}, function(err){
