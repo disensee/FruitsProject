@@ -82,7 +82,7 @@ const Fruit = mongoose.model("Fruit", fruitSchema);
 
 
 const fruit = new Fruit({
-  name: "Peach",
+  //name: "Peach",
   rating: 10,
   review: "Peaches are lovely."
 });
@@ -133,6 +133,20 @@ const person = new Person({
 //person.save();
 
 
+
+//Mongoose find is located below commented out code
+// const findDocuments = function(db, callback){
+//   //get the documents collection
+//   const collection = db.collection('fruits');
+//   //find some documents
+//   collection.find({}).toArray(function(err, fruits){
+//     assert.equal(err, null);
+//     console.log("Found the following records");
+//     console.log(fruits);
+//     callback(fruits);
+//   });
+// }
+
 //--------READ--------//
 //Find all
 Fruit.find(function(err, fruits){
@@ -150,17 +164,29 @@ Fruit.find(function(err, fruits){
 });
 
 
-//
-// const findDocuments = function(db, callback){
-//   //get the documents collection
-//   const collection = db.collection('fruits');
-//   //find some documents
-//   collection.find({}).toArray(function(err, fruits){
-//     assert.equal(err, null);
-//     console.log("Found the following records");
-//     console.log(fruits);
-//     callback(fruits);
-//   });
-// }
+//-------UPDATE-------//
+// Fruit.updateOne({_id: "5fa9de2f69268653e05a5533"}, {name: "Peach"}, function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Successfully updated the document");
+//   }
+// });
 
-//----------------ALL THE FOLLOWING CODE IS FOR MONGOOSE--------------------
+//-----DELETE ONE-----//
+// Fruit.deleteOne({_id: "5fa9de2f69268653e05a5533"}, function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Sucessfully deleted document");
+//   }
+// });
+
+//----DELETE MANY-----//
+// Person.deleteMany({name: "John", age: 37}, function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Sucessfully deleted all specified documents");
+//   }
+// });
